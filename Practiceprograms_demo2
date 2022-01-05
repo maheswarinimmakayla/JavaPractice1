@@ -1,0 +1,177 @@
+// Factorial Program
+package com.loppsexamples;
+
+public class Factorial {
+
+	public static void main(String args[]){  
+		
+	// Using for loop
+  
+		  int i,fact=1;  
+		  int number=5;//It is the number to calculate factorial    
+		  for(i=1;i<=number;i++){    
+		      fact = fact*i;    
+		  }    
+		  System.out.println("Factorial of "+number+" is: "+fact);    
+		 }  
+     }
+	
+	
+  // Using While loop
+  
+	public class Factorial {
+	public static void main(String[] args) {
+
+       int num = 5, i = 1;
+        long factorial = 1;
+        while(i <= num)
+       {
+           factorial *= i;
+            i++;
+        }
+        System.out.printf("Factorial of %d = %d", num, factorial);
+    }
+}
+
+// Reverse Numbers
+
+package com.loppsexamples;
+
+public class RverseNumbers {
+	
+	// using for loop
+	
+	public static void main(String[] args) {
+	    
+	    int num = 1234567, reversed = 0;
+
+	    for(;num != 0; num /= 10) {
+	      int digit = num % 10;
+	      reversed = reversed * 10 + digit;
+	    }
+
+	    System.out.println("Reversed Number: " + reversed);
+	  }
+	
+	
+	// Using While Loop
+	
+	public static void main(String[] args) {
+
+    int num = 1234, reversed = 0;
+
+    // run loop until num becomes 0
+    while(num != 0) {
+	    
+      // get last digit from num
+      int digit = num % 10;
+      reversed = reversed * 10 + digit;
+
+	      // remove the last digit from num
+      num /= 10;
+	    }
+
+    System.out.println("Reversed Number: " + reversed);
+	  }
+	
+}
+
+// Strong Numbers Or Not
+
+package com.loppsexamples;
+import java.util.Scanner;
+public class StrongNumber {
+
+	public static void main(String[] args)
+	{
+		//scanner class declaration
+		Scanner sc = new Scanner(System.in);
+		//input from user
+		System.out.print("Enter a number : ");				
+		int number = sc.nextInt();
+		int fac,sum = 0;
+		int n = number;
+		while(n != 0)
+		{	
+			fac = 1;
+			int r = n % 10;
+			//calculating factorial of r
+			for(int i = r ; i >= 1 ; i--)
+			fac = fac * i;
+			//storing sum of factorial of all digits of the number
+			sum = sum + fac;
+			n=n/10;
+		}
+		//condition for strong number
+		if(sum == number)
+			System.out.println("Strong Number");
+		else
+			System.out.println("Not a Strong Number");
+	
+		sc.close();													
+	}
+}
+
+//Polindrom
+
+package com.loppsexamples;
+
+public class Polindrom {
+
+	 public static void main(String args[]){  
+		  int r,sum=0,temp;    
+		  int n=454;//It is the number variable to be checked for palindrome  
+		  
+		  temp=n;    
+		  while(n>0){    
+		   r=n%10;  //getting remainder  
+		   sum=(sum*10)+r;    
+		   n=n/10;    
+		  }    
+		  if(temp==sum)    
+		   System.out.println("palindrome number ");    
+		  else    
+		   System.out.println("not palindrome");    
+		}  
+}
+
+// Perfect Number or Not 
+package com.loppsexamples;
+import java.util.Scanner;
+public class PerfectNumverOrNot {
+	static long isPerfect(long num)  
+	{  
+	//variable stores the sum      
+	long sum=0;  
+	//executes until the condition becomes false  
+	for(int i=1; i <= num/2; i++)  
+	{  
+	if(num % i == 0)  
+	{  
+	//calculates the sum of factors  
+	sum=sum + i;  
+	} //end of if  
+	}  //end of for  
+	//returns the sum of factors  
+	return sum;   
+	} //end of method  
+	public static void main(String args[])    
+	{  
+	long number, s;  
+	Scanner sc=new Scanner(System.in);         
+	System.out.print("Enter the number: ");  
+	//reads a number from the user  
+	number=sc.nextLong();  
+	//calling the function  
+	s = isPerfect(number);  
+	//compares sum with the number  
+	if(s==number)  
+	System.out.println(number+" is a perfect number");  
+	else  
+	System.out.println(number+" is not a perfect number");   
+	}   
+	 
+}
+
+
+
