@@ -1,0 +1,109 @@
+package com.classobjectoops;
+import java.util.Scanner;
+public class Book {
+
+	String isbnNo;
+	String bookName;
+	float bookPrice;
+	int no_Of_Pages;
+	String publishedDate;
+	Scanner src = new Scanner(System.in);
+	
+	public void readBookDetails() {
+		
+		System.out.println("Enter the Book Details");
+		System.out.println("Enter the Book ISBN number");
+		isbnNo = src.next();
+		System.out.println("Enter the Book Name");
+		src.nextLine();
+		bookName = src.nextLine();
+		System.out.println("Enter the Book Price");
+		bookPrice = src.nextFloat();
+		System.out.println("Enter the no_Of_Pages");
+		no_Of_Pages = src.nextInt();
+		System.out.println("Enter the Book Published Date");
+		publishedDate = src.next();
+		
+	}
+     public void displayBookDetails() {
+		
+    	System.out.println("The Book Details");
+    	
+ 		System.out.println("Book ISBN number = " + isbnNo);
+ 		 
+ 		System.out.println("Book Name = "+bookName);
+ 		
+ 		System.out.println("Book Price = "+bookPrice);
+ 		
+ 		System.out.println("no_Of_Pages = "+no_Of_Pages);
+ 		
+ 		System.out.println("Published Date = " +publishedDate);
+		
+	}
+	
+	
+}
+
+
+// main method
+
+package com.classobjectoops;
+import java.util.Scanner;
+public class BookMain {
+//public static void main(String[] args) {
+//	Scanner src = new Scanner(System.in);
+//	Book book = new Book();
+//	char ch = 'y';
+//	while (ch == 'y') {
+//	System.out.println(" Enter the Transaction.....");
+//		System.out.println(" Enter 'read' to enter book details.......");
+//		System.out.println(" Enter 'display' to view book detailds......");
+//		
+//	String trancation = src.next();
+//	// using switch case
+//	switch(trancation) {
+//	case "read":
+//	 book.readBookDetails();
+//	 break;
+//	case "display":
+//		 book.DisplayBookDetails();
+//		 break;
+//	default:
+//	System.out.println(" Wrong Choice..");
+//	break;
+//	}// end switch case
+//	System.out.println("Enter Wrong Choice Continues..");
+//	ch = src.next().charAt(0);
+//}
+//}
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		// create a book object
+		Book b = new Book();
+		char ch = 'y';// local variable because it is defined inside main method
+
+		while (ch == 'y') {
+			System.out.println("Enter the Transaction.....");
+			System.out.println("Enter 'read' to enter book details.....");
+			System.out.println("Enter 'display' to view book details.....");
+			String transaction = sc.next();
+
+			switch (transaction) {
+			case "read":
+				b.readBookDetails();
+				break;
+			case "display":
+				b.displayBookDetails();
+				break;
+			default:
+				System.out.println("Wrong choice....");
+				break;
+			}// close of switch
+			System.out.println("Enter the choice to continue.....");
+			ch = sc.next().charAt(0);
+		} // close of while
+
+	}
+}
+
