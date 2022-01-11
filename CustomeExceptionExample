@@ -1,0 +1,162 @@
+import com.arrayFilenotfoundexceptiondemo.override;
+
+public class Product {
+//	ArrayofObjects and Exceptions Practice
+//	===================================
+//	Write a Java program to create product class with productId,productName,productPrice,productCategory
+//	and create an array of products
+//	search for a product by accepting productid from user if not found throw an exception called
+//	ProductNotFoundException
+//	If already product id exists throw an exception called ProductId already exists
+  private int productId;
+  private String productName;
+  private float productPrice;
+  private  String productCategory;
+  public Product() {
+		System.out.println("default constructor");
+	}
+  
+  public Product(int productId, String productName, float productPrice, String productCategory) {
+	 super();
+	this.productId = productId;
+	this.productName =productName;
+	this.productPrice = productPrice;
+	this.productCategory = productCategory;
+  }
+public int getProductId() {
+	return productId;
+}
+public void setProductId(int productId) {
+	this.productId = productId;
+}
+public String getProductName() {
+	return productName;
+}
+public void setProductName(String productName) {
+	this.productName = productName;
+}
+public float getProductPrice() {
+	return productPrice;
+}
+public void setProductPrice(float productPrice) {
+	this.productPrice = productPrice;
+}
+public String getProductCategory() {
+	return productCategory;
+}
+public void setProductCategory(String productCategory) {
+	this.productCategory = productCategory;
+}
+
+@override
+public String toString() {
+	return "Product[productId =" + productId +", productName =" + productName +" , productPrice ="
+			+ productPrice + ", productCategory =" + productCategory +"]";
+	
+}
+	
+}
+
+
+//Aray NotFoundException
+package com.arrayNotfoundexceptionDemo;
+
+public class ProductNotFoundException extends Exception {
+	private static final long serialVersionUID = -4066336746906713047L;
+
+	public ProductNotFoundException(String message) {
+		super(message);
+	}
+}
+// Mian Method 
+package com.arrayNotfoundexceptionDemo;
+import java.util.Scanner;
+public class ProductObjectArrayMainMethod  {
+public static void main(String[] args) {
+		
+		Product[] productArray = new Product[3];
+		
+		//firstway to store an object in to array
+		Product p1 = new Product(123, "mahi", 55.67f,"fdf");
+		System.out.println(p1.getProductId());
+		System.out.println(p1.getProductName());
+		System.out.println(p1.getProductPrice());
+		System.out.println(p1.getProductCategory());
+		
+		//store above object in productArray
+		productArray[0] = p1;
+		
+		System.out.println(productArray[0].toString());
+		
+		//second way of creating an object of product and store in array
+	productArray[1] = new Product(124, "reddy", 67.56f,"sddsd");
+		System.out.println(productArray[1].toString());
+		
+		//thirdway of creating an object of student and store in array
+		Scanner sc = new Scanner(System.in);
+		Product st2 = new Product();
+		System.out.println("Enter the Product Details");
+		System.out.println("Enter the Product id");
+		st2.setProductId(sc.nextInt());
+		System.out.println("Enter the Product name");
+		sc.nextLine();
+		st2.setProductName(sc.nextLine());
+		System.out.println("Enter the Product price");
+		st2.setProductPrice(sc.nextFloat());
+		System.out.println("Enter the Product Category");
+		sc.nextLine();
+		st2.setProductCategory(sc.nextLine());
+		
+		//store above object in to array
+		productArray[2] = st2;
+		System.out.println(productArray[2]);
+		System.out.println("list of all students using foreach loop........");
+		for (Product product : productArray) {
+			System.out.println(product);
+		}
+		// for loop
+	
+		Product[] productArray1 = new Product[3];
+		System.out.println("Enter the Product details");
+		for(int i=0;i<productArray1.length;i++) {
+			Product p2 = new Product();
+			System.out.println("Enter the Product Id");
+			p2.setProductId(sc.nextInt());
+			System.out.println("Enter the Product Name");
+			sc.nextLine();
+			p2.setProductName(sc.nextLine());
+			System.out.println("Enter the Product price");
+			p2.setProductPrice(sc.nextFloat());
+			System.out.println("Enter the Product Catreory");
+			sc.nextLine();
+			p2.setProductCategory(sc.nextLine());
+			
+			productArray1[i] = p2;
+		}
+		
+		System.out.println("list of all product using foreach loop........");
+		
+		for (Product product : productArray1) {
+			System.out.println(product);
+		}
+		
+		
+		System.out.println("Enter the product id to search.....");
+		int pid = sc.nextInt();
+		try {
+			for(int i=0;i<productArray1.length;i++) {
+				if(productArray1[i].getProductId() == pid) {
+					System.out.println("product found");
+				}else {
+					throw new ProductNotFoundException("Prodcut does not exist with id = " + pid);
+				}
+			}
+		}catch (ProductNotFoundException e) {
+			System.out.println(e.getMessage());
+		}finally {
+			sc.close();
+		}
+		
+	}
+}
+
