@@ -1,0 +1,105 @@
+//Student Class
+
+package com.arraylistandset;
+public class Student {
+  private int studentId;
+	private String studentName;
+	private Float studentMarks;
+public Student(int studentId, String studentName, Float studentMarks) {
+		super();
+		this.studentId = studentId;
+		this.studentName = studentName;
+		this.studentMarks = studentMarks;
+	}
+	public int getStudentId() {
+		return studentId;
+	}
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
+	}
+	public String getStudentName() {
+		return studentName;
+	}
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+	public Float getStudentMarks() {
+		return studentMarks;
+	}
+	public void setStudentMarks(Float studentMarks) {
+		this.studentMarks = studentMarks;
+	}
+	@Override 
+	  public String toString() { 
+		  return "Student [studentId=" + studentId
+	  + ", studentName=" + studentName + ", studentMarks=" + studentMarks + "]"; 
+		  }
+}
+========================================
+// StudentList  Hash Map Example
+
+package com.arraylistandset;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Scanner;
+public class StudentHashMap {
+public static void main(String[] args) {
+	HashMap<Integer,Student> studentData = new HashMap<Integer,Student>();
+	studentData.put(101, new Student(23,"rama",33.3f));
+	Student std = new Student(434,"sitha",34.3f);
+	studentData.put(102, std);
+	//Scanner class
+	Scanner src = new Scanner(System.in);
+	System.out.println("Enter student details.........");
+	System.out.println("Enter trhe student Id");
+	int sId = src.nextInt();
+	System.out.println("Enter trhe student Name");
+	src.nextLine();
+	String sName = src.nextLine();
+	System.out.println("Enter trhe student Marks");
+	float sMarks = src.nextFloat();
+	Student std1 = new Student(sId,sName,sMarks);
+	studentData.put(103, std1);
+	System.out.println(studentData);
+	for(Entry<Integer, Student> entry:studentData.entrySet()){    
+        int key=entry.getKey();  
+        Student b=entry.getValue();  
+        System.out.println(key+" Details:");  
+        System.out.println(b.getStudentId()+" "+b.getStudentName()+"  "+b.getStudentMarks());   
+    }    
+}
+}
+=======================================================
+// Student List Hash Set Example
+
+package com.arraylistandset;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Scanner;
+public class StudentHashSetExample {
+public static void main(String[] args) {
+	HashSet<Student> hashSet = new HashSet<Student>();
+    hashSet.add(new Student(1,"rama",33.3f));
+    Student std = new Student(434,"sitha",34.3f);
+    hashSet.add(std);
+    // using Scanner class
+  Scanner src = new Scanner(System.in);
+	System.out.println("Enter student details.........");
+	System.out.println("Enter trhe student Id");
+	int sId = src.nextInt();
+	System.out.println("Enter trhe student Name");
+	src.nextLine();
+	String sName = src.nextLine();
+	System.out.println("Enter trhe student Marks");
+	float sMarks = src.nextFloat();
+	Student std1 = new Student(sId,sName,sMarks);
+	hashSet.add(std1);
+	System.out.println(hashSet);
+	
+	Iterator<Student> itr = hashSet.iterator();
+	System.out.println("Elements of StudentDetails....");
+	while(itr.hasNext()) {
+		System.out.println(itr.next());
+	}
+}
+}
