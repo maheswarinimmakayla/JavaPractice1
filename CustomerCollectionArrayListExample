@@ -1,0 +1,245 @@
+// Customer 
+
+package com.collectionexamples;
+public class Customer {
+//	Practice on Collections to perform create,delete,findbyid,findall for Customer 
+//	(custId,custName,custEmail,custPhoneno) using Arraylist and its methods.
+	private String custId;
+	private String custName;
+	private String custEmail;
+	private int custPhoneno;
+	public String getCustId() {
+		return custId;
+	}
+	public void setCustId(String custId) {
+		this.custId = custId;
+	}
+	public String getCustName() {
+		return custName;
+	}
+	public void setCustName(String custName) {
+		this.custName = custName;
+	}
+	public String getCustEmail() {
+		return custEmail;
+	}
+	public void setCustEmail(String custEmail) {
+		this.custEmail = custEmail;
+	}
+	public int getCustPhoneno() {
+		return custPhoneno;
+	}
+	public void setCustPhoneno(int custPhoneno) {
+		this.custPhoneno = custPhoneno;
+	}
+	@Override
+	public String toString() {
+		return "Customer [custId=" + custId + ", custName=" + custName + ", custEmail=" + custEmail + ", custPhoneno="
+				+ custPhoneno + "]";
+	}
+}
+
+===================================================
+// CustomerManagementSystem
+
+package com.collectionexamples;
+import java.util.ArrayList;
+import java.util.Scanner;
+public class CustomerManagementSystem {
+	Scanner sc = new Scanner(System.in);
+	ArrayList<Customer> customertList = new ArrayList<Customer>();
+	Customer c = null;
+	public void addCustomer(Customer c) {
+		customertList.add(c);
+	}
+	public void showCustomers() {
+		System.out.println("List of Customer......");
+		for(int i = 0;i<customertList.size();i++) {
+				System.out.println(customertList.get(i).getCustId()
+						+ "\t" + customertList.get(i).getCustName()
+						+ "\t" + customertList.get(i).getCustEmail()
+						+ "\t" + customertList.get(i).getCustPhoneno());
+		}
+	}
+	public Customer readCustomersDetails(Customer c) {
+		
+		System.out.println("Enter the Customer details");
+		System.out.println("Enter the Customer id");
+		sc.nextLine();
+		c.setCustId(sc.nextLine());
+		System.out.println("Enter the Customer name");
+		sc.nextLine();
+		c.setCustName(sc.nextLine());
+		System.out.println("Enter the Customer email");
+		sc.nextLine();
+		c.setCustEmail(sc.nextLine());
+		System.out.println("Enter the Customer phonenumber");
+		c.setCustPhoneno(sc.nextInt());
+		return c;
+		
+	}
+	
+	public Customer findCustomerById(String cid) {
+		Customer c12 = new Customer();
+		for(int i = 0;i<customertList.size();i++) {
+			if((customertList.get(i).getCustId().equals(cid))) {
+				c12 = customertList.get(i);
+			}
+		}
+		return c12;
+		
+	}
+	
+	public String removeCustomer(Customer cr) {
+		if(customertList.remove(cr)) {
+			return "Customer removed successfully";
+		}else {
+			return "no customer found to remove";
+		}
+	}
+	
+	public void showCustomerOperations() {
+		char ch = 'y';
+		while (ch=='y') {
+			
+			System.out.println("Enter the Operation name to execute .....");
+			System.out.println("1.to add customer");
+			System.out.println("2.list all customer");
+			System.out.println("3.to delete the customer");
+			System.out.println("4.to update customer");
+			System.out.println("5.to sort customer");
+			int op = sc.nextInt();
+			switch (op) {
+			case 1:
+				c = new Customer();
+				addCustomer(readCustomersDetails(c));
+				break;
+			case 2:
+				showCustomers();
+				break;
+			case 3:
+				System.out.println("Enter the customer id to remove...");
+				String pid = sc.next();
+				Customer c1 = findCustomerById(pid);
+				System.out.println(removeCustomer(c1));
+				break;
+
+			default:
+				break;
+			}
+			
+			System.out.println("do you want to continue....");
+			ch = sc.next().charAt(0);
+		}
+	}
+}
+========================================================
+// Customer Main Method
+
+package com.collectionexamples;
+
+public class CustomerMain {
+public static void main(String[] args) {
+	CustomerManagementSystem cms = new CustomerManagementSystem();
+	
+	cms.showCustomerOperations();
+}
+}
+======================================================
+//OutPut
+
+Enter the Operation name to execute .....
+1.to add customer
+2.list all customer
+3.to delete the customer
+4.to update customer
+5.to sort customer
+1
+Enter the Customer details
+Enter the Customer id
+34
+Enter the Customer name
+mahireddy
+Enter the Customer email
+mahireddy@gmail.com
+Enter the Customer phonenumber
+44433
+do you want to continue....
+y
+Enter the Operation name to execute .....
+1.to add customer
+2.list all customer
+3.to delete the customer
+4.to update customer
+5.to sort customer
+2
+List of Customer......
+34	mahireddy	mahireddy@gmail.com	44433
+do you want to continue....
+y
+Enter the Operation name to execute .....
+1.to add customer
+2.list all customer
+3.to delete the customer
+4.to update customer
+5.to sort customer
+3
+Enter the customer id to remove...
+34
+Customer removed successfully
+do you want to continue....
+y
+Enter the Operation name to execute .....
+1.to add customer
+2.list all customer
+3.to delete the customer
+4.to update customer
+5.to sort customer
+1
+Enter the Customer details
+Enter the Customer id
+23
+Enter the Customer name
+msr
+Enter the Customer email
+sdd@ds.com
+Enter the Customer phonenumber
+322
+do you want to continue....
+y
+Enter the Operation name to execute .....
+1.to add customer
+2.list all customer
+3.to delete the customer
+4.to update customer
+5.to sort customer
+2
+List of Customer......
+23	msr	sdd@ds.com	322
+do you want to continue....
+y
+Enter the Operation name to execute .....
+1.to add customer
+2.list all customer
+3.to delete the customer
+4.to update customer
+5.to sort customer
+4
+do you want to continue....
+y
+Enter the Operation name to execute .....
+1.to add customer
+2.list all customer
+3.to delete the customer
+4.to update customer
+5.to sort customer
+5
+do you want to continue....
+y
+Enter the Operation name to execute .....
+1.to add customer
+2.list all customer
+3.to delete the customer
+4.to update customer
+5.to sort customer
+
