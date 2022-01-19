@@ -1,0 +1,237 @@
+JDBC Operations
+===========================================================================================================
+package com.jdbccrudexamples;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
+public class JDBCOperations {
+    static Connection conn = null;
+	static PreparedStatement pstmt = null;
+	static Statement stmt = null;
+	static Scanner sc = new Scanner(System.in);
+	public JDBCOperations() {
+		conn = DBConnection.getDBConnection();
+	}
+	char ch = 'y';
+	
+	public void jdbcOperations() {
+		while(ch=='y') {
+		System.out.println("Enter the choice of JDBC Operation");
+		System.out.println("insert : to insert the Movie Details data");
+		System.out.println("update : to update the  Movie Details  data");
+		System.out.println("delete : to delete the  Movie Details  data");
+		System.out.println("selectone : to view a specific  Movie Details  data");
+		System.out.println("selectall : to view all  Movie Details  data");
+		sc.nextLine();
+		String choice = sc.nextLine();
+		
+		switch (choice) {
+		case "insert":
+			insertMoviedetails();
+			break;
+		case "update":
+			updateMoviedetails();
+			break;
+		case "delete":
+			deleteMoviedetails();
+			break;
+		case "selectall":
+			selectAllMoviedetails();
+			break;
+		case "selectone":
+			selectMoviedetailsById();
+			break;
+		default:
+			System.out.println("no case found....");
+			break;
+		}
+			System.out.println("do you want to continue");
+			ch = sc.next().charAt(0);
+		}
+	}
+
+	private void deleteMoviedetails() {
+try {
+			
+			String deleteStmt = "delete from movie_details where movie_id = ?";
+			 pstmt = conn.prepareStatement(deleteStmt);
+			//read the values and set the values to the ?
+			System.out.println("Enter the movie details details to delete");
+			System.out.println("enter movie details id to update...");
+			int mid = sc.nextInt();
+			pstmt.setInt(1, mid);
+			int i =pstmt.executeUpdate();
+			if(i != 0) {
+				System.out.println("deleted successfully");
+			}else {
+				System.out.println("Not deleted as movie details with id = " + mid + " not found");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void selectMoviedetailsById() {
+		try {
+			
+			String selectStmt = "select * from movie_details where movie_id = ?";
+			 pstmt = conn.prepareStatement(selectStmt);
+			//read the values and set the values to the ?
+			System.out.println("Enter the movie details id to view details");
+			//System.out.println("enter supervisior id to update...");
+			int mid = sc.nextInt();
+			pstmt.setInt(1, mid);
+			//int i =pstmt.executeUpdate();
+			ResultSet rs = pstmt.executeQuery();		
+				System.out.println("movie details found successfully");
+				System.out.println("movie details details are .........");
+				while(rs.next()) {
+					System.out.println("movie details Id :=" + rs.getInt("movie_id"));
+					System.out.println("movie details Name :=" + rs.getString("movie_name"));
+					System.out.println("movie details Language :=" + rs.getString("movie_language"));
+					System.out.println("movie details type :=" + rs.getString("movie_type"));
+					System.out.println("movie details rating :=" + rs.getFloat("movie_rating"));
+				}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void selectAllMoviedetails() {
+try {
+			
+			String selectStmt = "select * from movie_details";
+			 pstmt = conn.prepareStatement(selectStmt);
+			ResultSet rs = pstmt.executeQuery();	
+			System.out.println("movie details details are .........");
+			System.out.println("=======================================================================================================================================================================================================");
+			System.out.println("movie_details ID" + "\t" + "movie_details Name" + "\t" + "movie_details Language" + "\t" + "movie_details Type" + "\t" + "movie_details Rating" );
+			System.out.println("=======================================================================================================================================================================================================");
+	
+			while(rs.next()) {
+					System.out.println(rs.getInt("movie_id") + "\t\t" + rs.getString(2) + "\t\t" + rs.getString(3) + "\t\t" + rs.getString(4) + "\t\t" + rs.getFloat(5));
+					
+				}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void updateMoviedetails() {
+		try {
+			
+			String updateStmt = "update movie_details set movie_name = ? where movie_id = ?";
+			 pstmt = conn.prepareStatement(updateStmt);
+			//read the values and set the values to the ?
+			System.out.println("Enter the movie details details to update");
+			System.out.println("enter movie details name to update...");
+			String sname = sc.nextLine();
+			pstmt.setString(1, sname);
+			System.out.println("enter movie details id to update...");
+			int mid = sc.nextInt();
+			pstmt.setInt(2, mid);
+			int i =pstmt.executeUpdate();
+			if(i != 0) {
+				System.out.println("updated successfully");
+			}else {
+				System.out.println("Not updated as movie details with id = " + mid + " not found");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void insertMoviedetails() {
+		//step1 => to register the driver
+				try {
+					
+					String insertStmt =  
+							"insert into movie_details"
+							+ "(movie_id,movie_name,movie_language,movie_type,movie_rating) "
+							+ "values(?,?,?,?,?);";
+				//step 3 => Create statement
+					 pstmt = conn.prepareStatement(insertStmt);
+					//read the values and set the values to the ?
+				    System.out.println("Enter the movie details details");
+				  			    
+					System.out.println("enter movie details id...");
+					int mid = sc.nextInt();
+					pstmt.setInt(1, mid);
+				    sc.nextLine();
+					System.out.println("enter movie details name...");
+					String mname = sc.nextLine();
+					pstmt.setString(2, mname);
+					System.out.println("Enter movie details language...");
+					String mlanguage = sc.nextLine();
+					pstmt.setString(3, mlanguage);
+					System.out.println("Enter the movie details type...");
+					String mtype = sc.nextLine();
+					pstmt.setString(4, mtype);
+					System.out.println("Enter the movie details rating...");
+					String mrating = sc.nextLine();
+					pstmt.setString(5, mrating);
+					// step 4 => Execute the statement
+					int i =pstmt.executeUpdate();
+					// step 5 => show the results
+					if(i != 0) {
+						System.out.println("Inserted successfully");
+					}else {
+						System.out.println("Not inserted successfully");
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+		
+	}
+	}
+
+========================================================================================================================
+JDBCMainMethod:
+package com.jdbccrudexamples;
+
+public class JDBCMainMethod {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		JDBCOperations jdbcoperations = new JDBCOperations();
+
+		jdbcoperations.jdbcOperations();
+	}
+
+}
+==============================================================================================================================
+JDBC Connection:
+package com.jdbccrudexamples;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+public class DBConnection {
+	static Connection con; // = null;
+	static Statement stmt; // = null;
+
+	public static Connection getDBConnection() {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			// step 2 => Establish the connection to DB
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/MovieDetails", "root", "root");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return con;
+	}
+}
