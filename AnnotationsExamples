@@ -1,0 +1,99 @@
+package annotationex;
+
+
+public class A {
+	public void display() {
+		System.out.println("hello.....");
+	}
+
+	@Deprecated
+	public void message() {
+		System.out.println("deprecated annotatio example");
+	} 
+
+}
+================================================================
+
+
+package annotationex;
+
+public class B extends A {
+	@Override
+	public void display() {
+		System.out.println("hello from class B.....");
+	}
+
+}
+======================================================================
+/**
+ * this annotation is used for method to check value of integer
+ */
+package annotationex;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+@Documented
+@Retention(RUNTIME)
+@Target(METHOD)
+@Inherited
+/**
+ * @author Dell
+ *
+ */
+
+public @interface CustomAnnotation {
+	int data() default 100;
+	String message() default "hello";
+}
+================================================================
+package annotationex;
+import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
+import static java.lang.annotation.ElementType.CONSTRUCTOR;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.LOCAL_VARIABLE;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.PACKAGE;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.ElementType.TYPE_PARAMETER;
+import static java.lang.annotation.ElementType.TYPE_USE;
+import static java.lang.annotation.RetentionPolicy.CLASS;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+@Retention(CLASS)
+@Target({ TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE, ANNOTATION_TYPE, PACKAGE, TYPE_PARAMETER,
+		TYPE_USE, MODULE })
+/**
+ * @author Dell
+ *
+ */
+
+public @interface DummyAnnotation {
+
+}
+
+
+==============================================================
+package annotationex;
+@SuppressWarnings( value = {"deprecation","unused"})
+
+public class StandardAnnotationsInJava {
+
+	
+	public static void main(String[] args) {
+		A a = new B();
+		a.display();
+		a.message();
+		
+		
+		int data = 30;
+
+	}
+
+}
